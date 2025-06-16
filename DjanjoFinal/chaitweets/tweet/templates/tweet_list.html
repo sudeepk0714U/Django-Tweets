@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  Tweet
+{% endblock title %}
+
+{% block content %}
+<h1 class="text-center text-white mt-5 mb-4">Welcome to Django Tweet Project 🐦</h1>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4 class="text-light">Recent Tweets</h4>
+  <a class="btn btn-success" href="{% url 'tweet_create' %}">+ Create a Tweet</a>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+  {% for tweet in tweets %}
+    <div class="col">
+      <div class="card h-100 shadow-sm bg-dark text-light border-light">
+        
+        {% if tweet.photo %}
+          <img src="{{ tweet.photo.url }}" class="card-img-top" alt="Tweet image">
+        {% else %}
+          <img src="https://via.placeholder.com/286x180?text=No+Image" class="card-img-top" alt="No image">
+        {% endif %}
+
+        <div class="card-body">
+          <h5 class="card-title">@{{ tweet.user.username }}</h5>
+          <p class="card-text">{{ tweet.text }}</p>
+        </div>
+
+        {% if tweet.user == user %}
+        <div class="card-footer d-flex justify-content-between">
+          <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-outline-primary btn-sm">Edit</a>
+          <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-outline-danger btn-sm">Delete</a>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+  {% empty %}
+    <p class="text-light">No tweets found.</p>
+  {% endfor %}
+</div>
+{% endblock %}

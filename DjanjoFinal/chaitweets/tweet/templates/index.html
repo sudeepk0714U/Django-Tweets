@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Tweet Home
+{% endblock title %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="text-center">
+        <h1 class="text-white fw-bold mb-4">Welcome to the Django Tweet Project 🐦</h1>
+        <p class="text-light fs-5">Create, view, and share your tweets with the world.</p>
+        <a href="{% url 'tweet_create' %}" class="btn btn-primary mt-3">Create a Tweet</a>
+    </div>
+</div>
+{% endblock %}
